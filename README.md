@@ -2,7 +2,14 @@
 
 ## Part 1: Creating a SQL Database
 1. Turn `top_sellers.csv` into a database
+        
 2. List the steps to set up your SQL database here:
+
+- Open a default schema
+- Right-click and use Table Data Import Wizard
+- Import the CSV as a new file
+- To view it, right click and Select Rows
+
 
 ## Part 2: Java to SQL
 1. Choose a dataset with multiple tables off [Kaggle](https://www.kaggle.com/)
