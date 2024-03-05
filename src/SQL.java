@@ -19,13 +19,13 @@ public class SQL {
 
     }
 
-    public ResultSet getResults(String query) throws SQLException {
+    public ResultSet getResults(String query, Statement stmnt) throws SQLException {
         String url = "jdbc:mysql://localhost:3306/pokemon_spotify";
         String username = "java";
         String password = "password";
 
         try (Connection c = DriverManager.getConnection(url, username, password)) {
-            Statement stmt = c.createStatement();
+         Statement stmt = stmnt;
             ResultSet rs = stmt.executeQuery(query);
 
             return rs;
