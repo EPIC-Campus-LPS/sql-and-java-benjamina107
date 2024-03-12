@@ -1,32 +1,45 @@
 import java.sql.SQLException;
 import java.sql.*;
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) throws SQLException {
-        String url = "jdbc:mysql://localhost:3306/pokemon_spotify";
-        String username = "java";
-        String password = "password";
+
         SQL sql = new SQL();
-        sql.connect();
 
-        int num = 25;
-
-        Statement stmt = DriverManager.getConnection(url, username, password).createStatement();
-        ResultSet rs = sql.getResults("SELECT name FROM pokedex WHERE pokedex_number = " + num + " ;", stmt );
+        Scanner scanner = new Scanner(System.in);
 
 
-        Statement stmt2 = DriverManager.getConnection(url, username, password).createStatement();
-        ResultSet rs2 = sql.getResults("SELECT Title, Artist FROM spotify WHERE ranking = " + num + " ;",  stmt2 );
+        System.out.println();
+        System.out.println("Input a number");
+        System.out.println();
+
+        String word = scanner.next();
 
 
-        while(rs.next()) {
-            System.out.print(rs.getString("name") + ", ");
-        }
-        System.out.print(" matches with the song " );
-        while(rs2.next()) {
-            System.out.print(rs2.getString("Title"));
-            System.out.print(" by ");
-            System.out.println(rs2.getString("Artist"));
-        }
+
+
+
+
+
+
+
+
+
+        int num = (int) (889 * Math.random() + 1);
+
+        System.out.print(sql.getFromNumber("pokedex", num, "name"));
+        System.out.print(", the ");
+        System.out.println(sql.getFromNumber("pokedex", num, "species"));
+
+        System.out.print(sql.getFromNumber("spotify", num, "name"));
+        System.out.print(", by ");
+        System.out.println(sql.getFromNumber("spotify", num, "Artist"));
+
+        System.out.print(sql.getFromNumber("topcompanies", num, "name"));
+        System.out.print(", from ");
+        System.out.println(sql.getFromNumber("topcompanies", num, "Country"));
+
     }
 }

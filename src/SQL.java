@@ -3,37 +3,46 @@ public class SQL {
 
     private Connection connection;
 
-    public void connect() {
+    public String getFromNumber(String set, int num, String column) throws SQLException {
         String url = "jdbc:mysql://localhost:3306/pokemon_spotify";
         String username = "java";
         String password = "password";
-
-        System.out.println("Connecting database ...");
-
-        try (Connection c = DriverManager.getConnection(url, username, password)) {
-            System.out.println("Database connected!");
-            connection = c;
-        } catch (SQLException e) {
-            throw new IllegalStateException("Cannot connect the database!", e);
+        String query = "SELECT " + column + " FROM "+ set + " WHERE number = " + num + " ;";
+        Statement stmt = DriverManager.getConnection(url, username, password).createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        String rsString = "";
+        if (rs.next()) {
+            rsString = rs.getString(column);
         }
+
+
+        if (rs.next()) {
+            while (rs.next()) {
+                rsString += ", " + rs.getString(column);
+            }
+        }
+
+        return rsString;
 
     }
 
-    public ResultSet getResults(String query, Statement stmnt) throws SQLException {
+    public void removeEntry(int num) throws SQLException {
         String url = "jdbc:mysql://localhost:3306/pokemon_spotify";
         String username = "java";
         String password = "password";
-
-        try (Connection c = DriverManager.getConnection(url, username, password)) {
-         Statement stmt = stmnt;
-            ResultSet rs = stmt.executeQuery(query);
-
-            return rs;
-        } catch (SQLException e) {
-            throw new IllegalStateException("Cannot connect the database!", e);
-        }
-
-
+        String query = "DELETE FROM pokedex WHERE number = " + num + ";";
+        Statement stmt = DriverManager.getConnection(url, username, password).createStatement();
+        ResultSet rs = stmt.executeQuery(query);
     }
+
+    public void addEntry(int num) throws SQLException {
+        String url = "jdbc:mysql://localhost:3306/pokemon_spotify";
+        String username = "java";
+        String password = "password";
+        String query = "DELETE FROM pokedex WHERE number = " + num + ";";
+        Statement stmt = DriverManager.getConnection(url, username, password).createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+    }
+
 
 }
