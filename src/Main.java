@@ -9,7 +9,6 @@ public class Main {
         SQL sql = new SQL();
 
         int num = (int) (889 * Math.random() + 1);
-
         System.out.print(sql.getFromNumber("pokedex", num, "name"));
         System.out.print(", the ");
         System.out.println(sql.getFromNumber("pokedex", num, "species"));
